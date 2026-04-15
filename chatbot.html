@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
     <head>
+        <link rel="stylesheet" href="excercise.css">
         <title>Chatbot</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
                 margin-top: 0;
                 margin-bottom: 0;
+                margin-bottom: 1000px;
             }
             .chat-input-container {
                 display: flex;
@@ -88,6 +90,9 @@
                 }
 
                 function sendMessage() {
+                    if (inputText === null || inputText.trim() === "") {
+                        return;
+                    }
                     const newChatMessages = [
                         ...chatMessages,
                         {
@@ -164,10 +169,21 @@
             }
 
             function ChatMessages({ chatMessages }) {
-                React.useEffect(() => {});
+                const chatMessagesRef = React.useRef(null);
+
+                React.useEffect(() => {
+                    const chatMessagesContainer = chatMessagesRef.current;
+                    if (chatMessagesContainer) {
+                        chatMessagesContainer.scrollTop =
+                            chatMessagesContainer.scrollHeight;
+                    }
+                }, [chatMessages]);
 
                 return (
-                    <div className="chat-messages-container">
+                    <div
+                        className="chat-messages-container"
+                        ref={chatMessagesRef}
+                    >
                         {chatMessages.map((message) => {
                             return (
                                 <ChatMessage
@@ -177,6 +193,24 @@
                                 />
                             );
                         })}
+                    </div>
+                );
+            }
+
+            function Excercise() {
+                const [isOn, setIsOn] = React.useState(false);
+                return (
+                    <div>
+                        <h1>Excercise</h1>
+                        <p>
+                            Excercise: 1
+                        </p>
+                        <button
+                            className={isOn ? "exc-button-1-on" : "exc-button-1-off"}
+                            onClick={() => setIsOn(!isOn)}
+                        >
+                            {isOn ? "ON" : "OFF"}
+                        </button>
                     </div>
                 );
             }
@@ -212,6 +246,7 @@
                             chatMessages={chatMessages}
                             setChatMessages={setChatMessages}
                         />
+                        <Excercise />
                     </div>
                 );
             }

@@ -8,7 +8,7 @@ export function OrderTracking() {
       <div className="delivery-date">Arriving on Monday, June 13</div>
 
       <div className="product-info">
-        Black and Gray Athletic Cotton Socks - 6 Pairs
+        Black and Gray Athletic Cotton Socks - 6 Pairs 1
       </div>
 
       <div className="product-info">Quantity: 1</div>

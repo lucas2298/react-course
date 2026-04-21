@@ -10,9 +10,11 @@ export function OrdersPage({ cartItems }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/orders?expand=products")
-      .then((response) => setOrders(response.data));
+    const getOrders = async () => {
+      var response = await axios.get("/api/orders?expand=products");
+      setOrders(response.data);
+    };
+    getOrders();
   }, []);
 
   return (
@@ -32,7 +34,6 @@ export function OrdersPage({ cartItems }) {
                   <OrderHeader order={order} />
 
                   <OrdersDetailGrid order={order} />
-                  
                 </div>
               );
             })}

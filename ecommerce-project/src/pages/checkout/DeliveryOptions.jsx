@@ -12,12 +12,13 @@ export function DeliveryOptions({ cartItem, deliveryOptions }) {
           priceString = `${formatMoney(deliveryOption.priceCents)} - Shipping`;
         }
         return (
-          <div className="delivery-option">
+          <div key={deliveryOption.id} className="delivery-option">
             <input
               type="radio"
               checked={deliveryOption.id === cartItem.deliveryOptionId}
               className="delivery-option-input"
               name={`delivery-option-${cartItem.productId}`}
+              onChange={() => {}}
             />
             <div>
               <div className="delivery-option-date">

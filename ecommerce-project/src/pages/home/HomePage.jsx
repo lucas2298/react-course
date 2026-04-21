@@ -5,13 +5,16 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { ProductsGrid } from "./ProductsGrid";
 
-export function HomePage({ cartItems }) {
+export function HomePage({ cartItems, loadCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/products")
-      .then((response) => setProducts(response.data));
+    const getHomeData = async () => {
+      const response = await axios.get("/api/products");
+      setProducts(response.data);
+    };
+
+    getHomeData();
   }, []);
 
   return (
@@ -21,7 +24,7 @@ export function HomePage({ cartItems }) {
       <Header cartItems={cartItems} />
 
       <div className="home-page">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} loadCart={loadCart} />
       </div>
     </>
   );

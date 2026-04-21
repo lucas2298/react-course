@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { OrderSummary } from "./OrderSummary";
 import { PaymentSummary } from "./PaymentSummary";
 
-export function CheckoutPage({ cartItems }) {
+export function CheckoutPage({ cartItems, loadCart }) {
   let totalQuantity = 0;
   cartItems.forEach((cartItem) => {
     totalQuantity += cartItem.quantity;
@@ -30,7 +30,7 @@ export function CheckoutPage({ cartItems }) {
       setPaymentSummary(response.data);
     };
     getPaymentSummary();
-  }, []);
+  }, [cartItems]);
 
   return (
     <>
@@ -66,6 +66,7 @@ export function CheckoutPage({ cartItems }) {
           <OrderSummary
             cartItems={cartItems}
             deliveryOptions={deliveryOptions}
+            loadCart={loadCart}
           />
 
           <PaymentSummary paymentSummary={paymentSummary} />

@@ -26,6 +26,15 @@ export function HomePage({ cartItems, loadCart }) {
       <div className="home-page">
         <ProductsGrid products={products} loadCart={loadCart} />
       </div>
+
+      <VerySlowComponent />
     </>
   );
 }
+
+export const VerySlowComponent = () => {
+  useEffect(() => {
+    console.log("Very slow component rendered");
+  });
+  return <div>Very slow component</div>;
+};

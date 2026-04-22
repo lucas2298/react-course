@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  "use memo";
+  
   const [cartItems, setCartItems] = useState([]);
   const loadCart = async () => {
     const response = await axios.get("/api/cart-items?expand=product");
